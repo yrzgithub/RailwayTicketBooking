@@ -47,7 +47,7 @@ public class RailwayTicketBooking {
                 booker.cancel(name,id);
                 break;
                 
-                case 3:
+                case 4:
                 System.out.println("..........Booked Seat Details..........");
                 if(booker.getBooked().size()==0)
                 {
@@ -55,16 +55,19 @@ public class RailwayTicketBooking {
                 }
                 for(Passenger passenger:booker.getBooked())
                 {
-                    System.out.printf("Passenger ID : %d\nPassenger Name : %s\nPassenger Age : %d\nPassenger Preference : %c\n\n",passenger.id,passenger.name,passenger.age,passenger.preference);
+                    System.out.printf("Passenger ID : %d\nPassenger Name : %s\nPassenger Age : %d\nAlloted Preference : %c\n\n",passenger.id,passenger.name,passenger.age,passenger.allotted);
                 }
                 break;
 
-                case 4:
+                case 3:
                 System.out.println("..........Available Tickets..........");
-                System.out.printf("Seat Type                   vaccancies \n");
-                System.out.printf("Free Booth                  %d\n",booker.getFreeSeats());
-                System.out.printf("Free RAC                    %d\n",booker.getFreeRAC());
-                System.out.printf("Free Waiting List           %d\n",booker.getWaitingListCount());
+                System.out.printf("Seat Type                      vaccancies \n");
+                System.out.printf("Free Berth                         %d\n",booker.getFreeSeats());
+                System.out.printf("Free Upper Berth                   %d\n",Booker.ALLOTTED_THRESHOLD-Booker.ALLOTTED_U);
+                System.out.printf("Free Lower Berth                   %d\n",Booker.ALLOTTED_THRESHOLD-Booker.ALLOTTED_L);
+                System.out.printf("Free Middle Berth                  %d\n",Booker.ALLOTTED_THRESHOLD-Booker.ALLOTTED_M);
+                System.out.printf("Free RAC                           %d\n",booker.getFreeRAC());
+                System.out.printf("Free Waiting List                  %d\n",booker.getWaitingListCount());
                 break;
 
                 case 5:
