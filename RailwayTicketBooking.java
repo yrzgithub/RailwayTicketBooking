@@ -52,8 +52,20 @@ public class RailwayTicketBooking {
                 if(booker.getBooked().size()==0)
                 {
                     System.out.print("Details Not Available\n");
+                    break;
                 }
+                System.out.println("\n...Confrimed seats...\n");
                 for(Passenger passenger:booker.getBooked())
+                {
+                    System.out.printf("Passenger ID : %d\nPassenger Name : %s\nPassenger Age : %d\nAlloted Preference : %c\n\n",passenger.id,passenger.name,passenger.age,passenger.allotted);
+                }
+                System.out.println("\n...RAC List...\n");
+                for(Passenger passenger:booker.getRAC())
+                {
+                    System.out.printf("Passenger ID : %d\nPassenger Name : %s\nPassenger Age : %d\nAlloted Preference : %c\n\n",passenger.id,passenger.name,passenger.age,passenger.allotted);
+                }
+                System.out.println("\n...Waiting List...\n");
+                for(Passenger passenger:booker.getWaitingList())
                 {
                     System.out.printf("Passenger ID : %d\nPassenger Name : %s\nPassenger Age : %d\nAlloted Preference : %c\n\n",passenger.id,passenger.name,passenger.age,passenger.allotted);
                 }
@@ -221,7 +233,22 @@ class Booker
             if(passenger.id==id)
             {
                 booked.remove(passenger);
+                
+                if(passenger.allotted==UPPER_PREFERENCE)
+                {
+                    --ALLOTTED_U; 
+                }
+                else if(passenger.allotted==LOWER_PREFERENCE)
+                {
+                    ALLOTTED_L--;
+                }
+                else
+                {
+                    ALLOTTED_M--;
+                }
+
                 System.out.println("Passenger removed from Booked Passengers list");
+
                 if(RAC.size()>0) 
                 {
                     add(RAC.get(0));
@@ -232,19 +259,6 @@ class Booker
                         Passenger waiter = waiting_list.get(0);
                         waiting_list.remove(waiter);
                         add(waiter);
-                    }
-
-                    if(passenger.preference==UPPER_PREFERENCE)
-                    {
-                        --ALLOTTED_U; 
-                    }
-                    else if(passenger.preference==LOWER_PREFERENCE)
-                    {
-                        ALLOTTED_L++;
-                    }
-                    else
-                    {
-                        ALLOTTED_M++;
                     }
                 }
                 return;
